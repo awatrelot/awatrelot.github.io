@@ -1,5 +1,6 @@
-I"�
-<p>Voici un site web pour trouver le centre de dépistage du Covid le plus proche de chez vous : <a href="https://prrojet-tests-covid.nw.r.appspot.com/">Le site</a></p>
+I"m<p>Voici un site web pour trouver le centre de dépistage du Covid le plus proche de chez vous : <a href="https://prrojet-tests-covid.nw.r.appspot.com/">Le site</a></p>
+
+<p><a href="https://prrojet-tests-covid.nw.r.appspot.com/"><img src="/assets/img/homepage-test-covid.png" alt="Accéder au site" /></a></p>
 
 <h2 id="comment-cette-application-a-été-construite-">Comment cette application a été construite ?</h2>
 
@@ -25,7 +26,7 @@
 
 <h4 id="étape-2--requêter-les-centres-de-dépistage-les-plus-proches">Étape 2 : Requêter les centres de dépistage les plus proches</h4>
 
-<p>Une fois les coordonnées XY récupérées, La base BigQuery est requêtée grâce à la fonction ST_DISTANCE pour renvoyer les 10 résultats les plus proches, leurs attributs, ainsi que la distance calculée.</p>
+<p>Une fois les coordonnées XY récupérées, La base <strong>BigQuery</strong> est requêtée grâce à la fonction <em>ST_DISTANCE</em> pour renvoyer les 10 résultats les plus proches, leurs attributs, ainsi que la distance calculée.</p>
 
 <h4 id="étape-3--rendu-dans-lapplication">Étape 3 : Rendu dans l’application</h4>
 
@@ -35,6 +36,6 @@
 
 <h3 id="hébergement">Hébergement</h3>
 
-<p>L’application Flask est hégergée sur Google App Engine</p>
+<p>L’application Flask est hégergée sur <strong>Google App Engine</strong></p>
 
 :ET

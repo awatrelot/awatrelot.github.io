@@ -2,12 +2,14 @@
 layout: post
 title: Une application pour trouver le centre de dépistage le plus proche de chez vous
 date: 2020-05-30 13:32:20 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+description: Explication à propos du site web de dépistage du Covid. # Add post description (optional)
 img: national-cancer-institute-NFvdKIhxYlU-unsplash.jpg # Add image post (optional)
 fig-caption: Photo by National Cancer Institute on Unsplash # Add figcaption (optional)
 tags: [Front, API]
 ---
 Voici un site web pour trouver le centre de dépistage du Covid le plus proche de chez vous : [Le site](https://prrojet-tests-covid.nw.r.appspot.com/)
+
+[![Accéder au site]({{site.baseurl}}/assets/img/homepage-test-covid.png)](https://prrojet-tests-covid.nw.r.appspot.com/)
 
 ## Comment cette application a été construite ? 
 
