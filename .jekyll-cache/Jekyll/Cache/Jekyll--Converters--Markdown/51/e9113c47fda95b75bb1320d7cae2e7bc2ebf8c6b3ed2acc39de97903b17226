@@ -1,0 +1,40 @@
+I"}<p>Un client avec un besoin concernant l’optimisation de la distribution de prospectus spécialisés. En effet, les circuits de livraison avaient été réalisés il y a plusieurs années. Les nouveaux prospects se sont peu à peu ajoutés aux livraisons mais sans politique d’optimisation. Au bout de quelques années il était nécessaire d’identifier les tournées potentiellement problématiques.</p>
+
+<h2 id="étape-1--géocodage-des-prospects">Étape 1 : Géocodage des prospects</h2>
+
+<p>La première étape fut de géocoder les <strong>260 000</strong> prospects. Le géocodage consiste en la traduction d’une adresse postale en coordonnées XY, nécessaires pour les traitement et la représentation géographique.</p>
+
+<p>Pour cela j’ai utilisé l’API de <a href="https://geo.api.gouv.fr/adresse">adresse.gouv.fr</a></p>
+
+<h2 id="étape-2--lanalyse-par-hexagones">Étape 2 : L’analyse par Hexagones</h2>
+
+<p>Pour identifier les tournées potentiellement problématiques j’ai consolidé les données grâce à des hexagones de 300m de diagonale :</p>
+<ol>
+  <li>Grâce à Postgres/PostGIS j’ai généré cette grille de plusieurs millions d’hexagones géographiques. Puis grâce à une jointure spatiale, j’ai compté dans chaque hexagone le nombre de prospects.</li>
+  <li>Puis j’ai identifé les hexagones qui comportaient plusieurs tournés de livraisons différentes.</li>
+  <li>Puis j’ai identifié le nombre de tournées différentes pour les hexagones correspondants.</li>
+</ol>
+
+<p><img src="/assets/img/analyse-tournees/methode-hexagones.png" alt="analyse des hexagones" /></p>
+
+<ol>
+  <li>Enfin j’ai calculé le nombre de prospects de la tournée la plus importante et la proportion que cette tournée représente.</li>
+</ol>
+
+<p><img src="/assets/img/analyse-tournees/methode-hexagones-2.png" alt="analyse des hexagones 2" /></p>
+
+<h2 id="le-résultat">Le résultat</h2>
+
+<p>Cette méthode permet de réduire considérablement le scope d’analyse et d’identifier les cas intéressants. Sur l’hexagone identifié dans l’exemple suivant, la tournée principale (identifiée par les points rouges) représente 95%. Ce qui veut dire qu’un prospect seulement ne fait pas partie de cette tournée (le point bleu). La tournée peut donc être optimisée.</p>
+
+<h2 id="comment-cette-application-a-été-construite-">Comment cette application a été construite ?</h2>
+
+<h3 id="source-des-données">Source des données</h3>
+
+<p>Les données sont des données publiques disponibles sur data.gouv.fr. C’est une base au format CSV qui recense les centres de dépsitages avec leur localisation et des informations complémentaires (numéro de téléphone, site internet …) :</p>
+
+<blockquote>
+  <p><a href="https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/">https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/</a></p>
+</blockquote>
+
+:ET

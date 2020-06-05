@@ -1,0 +1,56 @@
+I"�<p>Un client avec un besoin concernant l’optimisation de la distribution de prospectus spécialisés. En effet, les circuits de livraison avaient été réalisés il y a plusieurs années. Les nouveaux prospects se sont peu à peu ajoutés aux livraisons mais sans politique d’optimisation. Au bout de quelques années il était nécessaire d’identifier les tournées potentiellement problématiques.</p>
+
+<h2 id="étape-1--géocodage-des-prospects">Étape 1 : Géocodage des prospects</h2>
+
+<p>La première étape fut de géocoder les <strong>260 000</strong> prospects. Le géocodage consiste en la traduction d’une adresse postale en coordonnées XY, nécessaires pour les traitement et la représentation géographique.</p>
+
+<p>Pour cela j’ai utilisé l’API de <a href="https://geo.api.gouv.fr/adresse">adresse.gouv.fr</a></p>
+
+<h2 id="étape-2--lanalyse-par-hexagones">Étape 2 : L’analyse par Hexagones</h2>
+
+<p>Pour identifier les tournées potentiellement problématiques j’ai consolidé les données grâce à des hexagones de 300m de diagonale :</p>
+<ol>
+  <li>Grâce à Postgres/PostGIS j’ai généré cette grille de plusieurs millions d’hexagones géographiques. Puis grâce à une jointure spatiale, j’ai compté dans chaque hexagone le nombre de prospects.</li>
+  <li>Puis j’ai identifé les hexagones qui comportaient plusieurs tournés de livraisons différentes.</li>
+  <li>Puis j’ai identifié le nombre de tournées différentes pour les hexagones correspondants.
+<img src="/assets/img/analyse-tournees/1-compte-hexagones.png" alt="analyse des hexagones" />
+<img src="/assets/img/analyse-tournees/1-compte-hexagones-petit.png" alt="analyse des hexagones" /></li>
+</ol>
+
+<h2 id="comment-cette-application-a-été-construite-">Comment cette application a été construite ?</h2>
+
+<h3 id="source-des-données">Source des données</h3>
+
+<p>Les données sont des données publiques disponibles sur data.gouv.fr. C’est une base au format CSV qui recense les centres de dépsitages avec leur localisation et des informations complémentaires (numéro de téléphone, site internet …) :</p>
+
+<blockquote>
+  <p><a href="https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/">https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/</a></p>
+</blockquote>
+
+<h3 id="enrichissement-et-stockage-des-données">Enrichissement et stockage des données</h3>
+
+<p>Les données sont stockées sur une base <strong>BigQuery (Google Cloud Platform)</strong>. Grâce aux champs de latitude et de longitude, un nouveau champ Geometry a été créé. Celui-ci est indispensable pour retrouver les centres de dépistage les plus proches dans l’application.</p>
+
+<h3 id="fonctionnement-de-lapplication">Fonctionnement de l’application</h3>
+
+<p>L’application est contruite en Python avec <strong>Flask</strong> et le Framework <strong>Materialize</strong> pour le rendu.</p>
+
+<h4 id="étape-1--récupération-des-coordonnées-géographiques">Étape 1 : Récupération des coordonnées géographiques</h4>
+
+<p>Une fois l’adresse postale envoyée, une requête est envoyée à l’API de <a href="https://geo.api.gouv.fr/adresse">adresse.gouv.fr</a> pour récupérer les coordonnées XY.</p>
+
+<h4 id="étape-2--requêter-les-centres-de-dépistage-les-plus-proches">Étape 2 : Requêter les centres de dépistage les plus proches</h4>
+
+<p>Une fois les coordonnées XY récupérées, La base <strong>BigQuery</strong> est requêtée grâce à la fonction <em>ST_DISTANCE</em> pour renvoyer les 10 résultats les plus proches, leurs attributs, ainsi que la distance calculée.</p>
+
+<h4 id="étape-3--rendu-dans-lapplication">Étape 3 : Rendu dans l’application</h4>
+
+<p>Une fois les centres de dépistage les plus proches récupérés, Flask créé un JSON et le renvoie sur la page de résultats. La page est alors générée grâce au moteur de rendu de Flask (template Jinja2) et une card est créée pour chaque établissement.</p>
+
+<p>Il est également possible de récupérer les résultats au format JSON. <a href="https://prrojet-tests-covid.nw.r.appspot.com/api">Voir le fonctionnement de l’API</a></p>
+
+<h3 id="hébergement">Hébergement</h3>
+
+<p>L’application Flask est hégergée sur <strong>Google App Engine</strong></p>
+
+:ET
