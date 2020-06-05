@@ -6,6 +6,7 @@ Gemfile.lock
 package-lock.json
 node_modules/
 
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
@@ -32,3 +33,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+/_posts/2020-04-05-analyse-tournees-livraison.markdown
