@@ -1,0 +1,37 @@
+I"�<p>Voici un site web pour trouver le centre de dépistage du Covid le plus proche de chez vous : <a href="https://prrojet-tests-covid.nw.r.appspot.com/">Le site</a></p>
+
+<h2 id="comment-cette-application-a-été-construite-">Comment cette application a été construite ?</h2>
+
+<h3 id="source-des-données">Source des données</h3>
+
+<p>Les données sont des données publiques disponibles sur data.gouv.fr. C’est une base au format CSV qui recense les centres de dépsitages avec leur localisation et des informations complémentaires (numéro de téléphone, site internet …) :</p>
+
+<blockquote>
+  <p><a href="https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/">https://www.data.gouv.fr/fr/datasets/sites-de-prelevements-pour-les-tests-covid/</a></p>
+</blockquote>
+
+<h3 id="enrichissement-et-stockage-des-données">Enrichissement et stockage des données</h3>
+
+<p>Les données sont stockées sur une base BigQuery (Google Cloud Platform). Grâce aux champs de latitude et de longitude, un nouveau champ Geometry a été créé. Celui-ci est indispensable pour retrouver les centres de dépistage les plus proches dans l’application.</p>
+
+<h3 id="fonctionnement-de-lapplication">Fonctionnement de l’application</h3>
+
+<p>L’application est contruite en Python avec Flask et le Framework Materialize pour le rendu.</p>
+
+<h4 id="étape-1--récupération-des-coordonnées-géographiques">Étape 1 : Récupération des coordonnées géographiques</h4>
+
+<p>Une fois l’adresse postale envoyée, une requête est envoyée à l’API de <a href="https://geo.api.gouv.fr/adresse">adresse.gouv.fr</a> pour récupérer les coordonnées XY.</p>
+
+<h4 id="étape-2--requêter-les-centres-de-dépistage-les-plus-proches">Étape 2 : Requêter les centres de dépistage les plus proches</h4>
+
+<ul>
+  <li>Hexagon shoreditch beard</li>
+  <li>Intelligentsia narwhal austin</li>
+  <li>Literally meditation four</li>
+  <li>Microdosing hoodie woke</li>
+</ul>
+
+<p>Wayfarers lyft DIY sriracha succulents twee adaptogen crucifix gastropub actually hexagon raclette franzen polaroid la croix. Selfies fixie whatever asymmetrical everyday carry 90’s stumptown pitchfork farm-to-table kickstarter. Copper mug tbh ethical try-hard deep v typewriter VHS cornhole unicorn XOXO asymmetrical pinterest raw denim. Skateboard small batch man bun polaroid neutra. Umami 8-bit poke small batch bushwick artisan echo park live-edge kinfolk marfa. Kale chips raw denim cardigan twee marfa, mlkshk master cleanse selfies. Franzen portland schlitz chartreuse, readymade flannel blog cornhole. Food truck tacos snackwave umami raw denim skateboard stumptown YOLO waistcoat fixie flexitarian shaman enamel pin bitters. Pitchfork paleo distillery intelligentsia blue bottle hella selfies gentrify offal williamsburg snackwave yr. Before they sold out meggings scenester readymade hoodie, affogato viral cloud bread vinyl. Thundercats man bun sriracha, neutra swag knausgaard jean shorts. Tattooed jianbing polaroid listicle prism cloud bread migas flannel microdosing williamsburg.</p>
+
+<p>Echo park try-hard irony tbh vegan pok pok. Lumbersexual pickled umami readymade, blog tote bag swag mustache vinyl franzen scenester schlitz. Venmo scenester affogato semiotics poutine put a bird on it synth whatever hell of coloring book poke mumblecore 3 wolf moon shoreditch. Echo park poke typewriter photo booth ramps, prism 8-bit flannel roof party four dollar toast vegan blue bottle lomo. Vexillologist PBR&amp;B post-ironic wolf artisan semiotics craft beer selfies. Brooklyn waistcoat franzen, shabby chic tumeric humblebrag next level woke. Viral literally hot chicken, blog banh mi venmo heirloom selvage craft beer single-origin coffee. Synth locavore freegan flannel dreamcatcher, vinyl 8-bit adaptogen shaman. Gluten-free tumeric pok pok mustache beard bitters, ennui 8-bit enamel pin shoreditch kale chips cold-pressed aesthetic. Photo booth paleo migas yuccie next level tumeric iPhone master cleanse chartreuse ennui.</p>
+:ET
