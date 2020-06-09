@@ -22,9 +22,7 @@ Pour identifier les tournées potentiellement problématiques j'ai consolidé le
 1. En **SQL** Grâce à **Postgres/PostGIS** j'ai généré cette grille de plusieurs millions d'hexagones géographiques. Puis grâce à une jointure spatiale, j'ai compté dans chaque hexagone le nombre de prospects.
 2. Puis j'ai identifé les hexagones qui comportaient plusieurs tournés de livraisons différentes.
 3. Puis j'ai identifié le nombre de tournées différentes pour les hexagones correspondants.
-
 ![analyse des hexagones]({{site.baseurl}}/assets/img/analyse-tournees/methode-hexagones.png)
-
 4. Enfin j'ai calculé le nombre de prospects de la tournée la plus importante et la proportion que cette tournée représente.
 
 ![analyse des hexagones 2]({{site.baseurl}}/assets/img/analyse-tournees/methode-hexagones-2.png)
